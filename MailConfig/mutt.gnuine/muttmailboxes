@@ -1,2 +1,4 @@
 mailboxes +INBOX \
+          +INBOX.Manteniments \
+          +INBOX.Manteniments.Casa\ Asia \
           +INBOX.Manteniments.Rac105

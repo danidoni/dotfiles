@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/opt/pgsql/data'
+let g:netrw_dirhist_2='/home/ddonisa/.rvm/gems/ruby-1.8.7-p370@casaasia/gems'
+let g:netrw_dirhist_3='/home/ddonisa/Projectes/casaasia/vendor/plugins/ubiquo_i18n'
+let g:netrw_dirhist_4='/home/ddonisa/.offlineimap'

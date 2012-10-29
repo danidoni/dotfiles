@@ -1,203 +1,151 @@
-# File:          $HOME/.mutt/color.all
-# Purpose:       Setup file for colorization of the mail program "Mutt".
-# Latest change: Don Jul 24 19:15:36 CEST 2003
-# Author: Michael Prokop - www.michael-prokop.at - online@michael-prokop.at
-# =======================================================================
+# vim: filetype=muttrc
 
-# valid color-values are " white black green magenta blue cyan yellow red default" (colorx -> http://www.mutt.org/doc/manual/manual-3.html#color)
-# foreground can optionally be prefixed with the keyword bright to make the foreground color boldfaced (e.g., brightred). 
+#
+#
+# make sure that you are using mutt linked against slang, not ncurses, or
+# suffer the consequences of weird color issues. use "mutt -v" to check this.
 
-## some misc stuff:
-#  color normal     black      white
-#  color error      red        white
-#  color indicator  blue       green
-#  color status     white      blue
-#  color tree       blue       white
-#  color hdrdefault red        white
-#  color quoted     blue       white
-#  color quoted1    yellow     white
-#  color quoted2    magenta    white
-#  color quoted3    cyan       white
-#  color tilde      yellow     black
-# color quoted4    blue       white
-# color quoted5    red        white
-#  color signature  blue       white
-#  color search     white      blue   # "search" - matches found with search within the internal pager.
-#  color markers    red        black  # "markers" indicate a wrapped line when showing messages with looong lines.
-#  color bold       green      black
-#  color underline  yellow     black
+# custom body highlights -----------------------------------------------
+# highlight my name and other personally relevant strings
+#color body          color136        color234        "(ethan|schoonover)"
+# custom index highlights ----------------------------------------------
+# messages which mention my name in the body
+#color index         color136        color234        "~b \"phil(_g|\!| gregory| gold)|pgregory\" !~N !~T !~F !~p !~P"
+#color index         J_cream         color230        "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~N !~T !~F !~p !~P"
+#color index         color136        color37         "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~T !~F !~p !~P"
+#color index         color136        J_magent        "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~F !~p !~P"
+## messages which are in reference to my mails
+#color index         J_magent        color234        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" !~N !~T !~F !~p !~P"
+#color index         J_magent        color230        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~N !~T !~F !~p !~P"
+#color index         J_magent        color37         "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~T !~F !~p !~P"
+#color index         J_magent        color160        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~F !~p !~P"
 
-## headers:
-#  color header     red        white  ^From:
-#  color header     red        white  ^To:
-#  color header     red        white  ^Cc:
-#  color header     green      white  ^Subject:
-#  color header     red        white  ^Date:
-#  color header     red        white  ^X-Operating-System:
-#  color header     red        white  ^User-Agent:
-#  color header     red        white  ^X-mailer:
+# for background in 16 color terminal, valid background colors include:
+# base03, bg, black, any of the non brights
 
-## MIME headers:
-#  color header   red   white     "MIME-Version: "
-#  color header   red   white     "Content-Type: "
-#  color header   red   white     "Content-Transfer-Encoding: "
-#  color header   red   white     "Content-Disposition: "
-#  color header   red   white     "Content-Encoding: "
-#  color header   red   white     "Content-Language: "
+# basic colors ---------------------------------------------------------
+color normal        color241        color234        
+color error         color160        color234        
+color tilde         color235        color234        
+color message       color37         color234        
+color markers       color160        color254        
+color attachment    color254        color234        
+color search        color61         color234        
+#color status        J_black         J_status        
+color status        color241        color235        
+color indicator     color234        color136        
+color tree          color136        color234                                    # arrow in threads
 
-## index-colors:
+# basic monocolor screen
+mono  bold          bold
+mono  underline     underline
+mono  indicator     reverse
+mono  error         bold
 
-# mail from myself *and* to myself (TODO items):
-#  color index black  brightyellow  '~p ~f prokop'
+# index ----------------------------------------------------------------
 
-# mail from important people (like myself ;-):
-#  color index white  red '~f prokop'
-#  color index yellow red '~f Cron'
-#  color index red    white   "~f Klyagin"   # author of cicq
-#  color index red    white   "~f moolenaar" # author of vim
+#color index         color160        color234        "~D(!~p|~p)"               # deleted
+#color index         color235        color234        ~F                         # flagged
+#color index         color166        color234        ~=                         # duplicate messages
+#color index         color240        color234        "~A!~N!~T!~p!~Q!~F!~D!~P"  # the rest
+#color index         J_base          color234        "~A~N!~T!~p!~Q!~F!~D"      # the rest, new
+color index         color160        color234        "~A"                        # all messages
+color index         color166        color234        "~E"                        # expired messages
+color index         color33         color234        "~N"                        # new messages
+color index         color33         color234        "~O"                        # old messages
+color index         color61         color234        "~Q"                        # messages that have been replied to
+color index         color240        color234        "~R"                        # read messages
+color index         color33         color234        "~U"                        # unread messages
+color index         color33         color234        "~U~$"                      # unread, unreferenced messages
+color index         color241        color234        "~v"                        # messages part of a collapsed thread
+color index         color241        color234        "~P"                        # messages from me
+color index         color37         color234        "~p!~F"                     # messages to me
+color index         color37         color234        "~N~p!~F"                   # new messages to me
+color index         color37         color234        "~U~p!~F"                   # unread messages to me
+color index         color240        color234        "~R~p!~F"                   # messages to me
+color index         color160        color234        "~F"                        # flagged messages
+color index         color160        color234        "~F~p"                      # flagged messages to me
+color index         color160        color234        "~N~F"                      # new flagged messages
+color index         color160        color234        "~N~F~p"                    # new flagged messages to me
+color index         color160        color234        "~U~F~p"                    # new flagged messages to me
+color index         color235        color160        "~D"                        # deleted messages
+color index         color245        color234        "~v~(!~N)"                  # collapsed thread with no unread
+color index         color136        color234        "~v~(~N)"                   # collapsed thread with some unread
+color index         color64         color234        "~N~v~(~N)"                 # collapsed thread with unread parent
+# statusbg used to indicated flagged when foreground color shows other status
+# for collapsed thread
+color index         color160        color235        "~v~(~F)!~N"                # collapsed thread with flagged, no unread
+color index         color136        color235        "~v~(~F~N)"                 # collapsed thread with some unread & flagged
+color index         color64         color235        "~N~v~(~F~N)"               # collapsed thread with unread parent & flagged
+color index         color64         color235        "~N~v~(~F)"                 # collapsed thread with unread parent, no unread inside, but some flagged
+color index         color37         color235        "~v~(~p)"                   # collapsed thread with unread parent, no unread inside, some to me directly
+color index         color136        color160        "~v~(~D)"                   # thread with deleted (doesn't differentiate between all or partial)
+#color index         color136        color234        "~(~N)"                    # messages in threads with some unread
+#color index         color64         color234        "~S"                       # superseded messages
+#color index         color160        color234        "~T"                       # tagged messages
+#color index         color166        color160        "~="                       # duplicated messages
 
-# Deleted Mails - use dark color as these are already "dealt with".
-   color index blue black "~D"
+# message headers ------------------------------------------------------
 
-# Mails with no obvious addresses (empty To: and Cc: lines)
-#   color index cyan white "! ~C ."
+#color header        color240        color234        "^"
+color hdrdefault    color240        color234        
+color header        color241        color234        "^(From)"
+color header        color33         color234        "^(Subject)"
 
-# Flagged Messages are important!
-#   color index brightred   black "~F"
+# body -----------------------------------------------------------------
 
-# "DONE mails" ie those I have already replied to.
-#   color index blue white  '~Q'
+color quoted        color33         color234        
+color quoted1       color37         color234        
+color quoted2       color136        color234        
+color quoted3       color160        color234        
+color quoted4       color166        color234        
 
-# non-multipart mails which are tex/html almost always are spam:
-#  color index brightmagenta white "~h 'Content-Type: text/html'"
+color signature     color240        color234        
+color bold          color235        color234        
+color underline     color235        color234        
+color normal        color244        color234        
+#
+color body          color245        color234        "[;:][-o][)/(|]"    # emoticons
+color body          color245        color234        "[;:][)(|]"         # emoticons
+color body          color245        color234        "[*]?((N)?ACK|CU|LOL|SCNR|BRB|BTW|CWYL|\
+                                                     |FWIW|vbg|GD&R|HTH|HTHBE|IMHO|IMNSHO|\
+                                                     |IRL|RTFM|ROTFL|ROFL|YMMV)[*]?"
+color body          color245        color234        "[ ][*][^*]*[*][ ]?" # more emoticon?
+color body          color245        color234        "[ ]?[*][^*]*[*][ ]" # more emoticon?
 
-# Sent to "Undisclosed Recipients":
-#  color index white      magenta  '~C Undisclosed.*Recipients'
+## pgp
 
-# When the Subject indicates a reply (with ":re" but without "Fwd"!)
-# then there *must* be a reference to the previous message!
-# So if there is neither an In-Reply-To nor a References line
-# then it must have been sent with a crappy mailer....
-#  color index yellow white "~s re: ! ~s fwd: ! ~x . ! ~h 'in-reply-to: '"
+color body          color160        color234        "(BAD signature)"
+color body          color37         color234        "(Good signature)"
+color body          color234        color234        "^gpg: Good signature .*"
+color body          color241        color234        "^gpg: "
+color body          color241        color160        "^gpg: BAD signature from.*"
+mono  body          bold                            "^gpg: Good signature"
+mono  body          bold                            "^gpg: BAD signature from.*"
 
-# No characters in body -> SPAM!
-#  color index white white   "! ~b ."
+# yes, an insance URL regex
+color body          color160        color234        "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+# and a heavy handed email regex
+#color body          J_magent        color234        "((@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]),)*@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]):)?[0-9a-z_.+%$-]+@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\])"
 
-## body-colors:
+# Various smilies and the like
+#color body          color230        color234        "<[Gg]>"                            # <g>
+#color body          color230        color234        "<[Bb][Gg]>"                        # <bg>
+#color body          color136        color234        " [;:]-*[})>{(<|]"                  # :-) etc...
+# *bold*
+#color body          color33         color234        "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
+#mono  body          bold                            "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
+# _underline_
+#color body          color33         color234        "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
+#mono  body          underline                       "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
+# /italic/  (Sometimes gets directory names)
+#color body         color33         color234        "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
+#mono body          underline                       "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
 
-# URLs (General Internet addresses):
-#  color body yellow red "(finger|ftp|http|news|telnet)://[^ >]*"
-#  color body yellow red "<URL:[^ ]*>"
-# web address without "http":
-#  color body yellow red "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+# Border lines.
+#color body          color33         color234        "( *[-+=#*~_]){6,}"
 
-# HTTPS addresses:
-#  color body yellow red "https://[^ >]*"
+#folder-hook .                  "color status        J_black         J_status        "
+#folder-hook gmail/inbox        "color status        J_black         color136        "
+#folder-hook gmail/important    "color status        J_black         color136        "
 
-# FTP addresses:
-#  color body yellow red "ftp://[^ ]*"
-
-# HTTP addresses:
-#  color body yellow red "[[:alnum:]][-+.#_[:alnum:]]*@[-+.[:alnum:]]*[[:alnum:]]"
-
-# Mailto links with a optional subject line:
-# Example: mailto:testonline@michael-prokop.at?subject=mutt
-#  color body yellow red "mailto: *[^ ]+\(\\?subject=[^ ]+\)?"
-
-# File names ("/path/file")
-#  color body brightgreen white "\\~?\(/[-_.,a-zA-Z0-9{}äöüß]+\)+"
-
-# Path names ("/path/")
-#  color body brightred   white "\(/[-_.a-zA-Z0-9]+\)+/"
-
-# Variables  ("$HOME")
-#  color body brightmagenta white "\\$[a-zA-Z][-_a-zA-Z]+"
-
-# Attribution line:
-# color body red white "^[*] .*:$"
-
-## abbreviations and "SCREAMING IN CAPS" in body:
-# The following includes umlauts - but that's quite clunky.
-# color body brightyellow  red "[A-ZÄÖÜ][-A-ZÄÖÜ]+[A-ZÄÖÜ][ .!?]?"
-
-# "+USE_GNU_REGEX":
-# When you use "+USE_GNU_REGEX" then you can also make use
-# of "start of word" ("\<") and "end of word" ("\>"):
-#  color body yellow  white    "\\<[-A-Z']{3,}\\>"
-
-# *Emphasized*, /emphasized/, and _emphasized_ words:
-# color body brightred      black   "[*/_]+ *[- &[:alnum:]]+ *[*/_]+"
-# this would catch false positives of the kind _foo* and /bar_
-# so we should choose matching pairs only:
-#  color body brightred  white   "[*][-[:alnum:]]+[*]"
-#  color body brightred  white     "/[-[:alnum:]]+/"
-#  color body brightred  white     "_[-[:alnum:]]+_"
-
-# Smileys:  :-)  ;-)  :-|  :-/  :-(
-#  color body brightyellow white    "[;:]-[)/(|]"
-# Grinning:  "grin" ([g]) and "big grin" ([bg]):
-#  color body blue   red      "<[Gg]>"
-#  color body blue   red      "<[Bb][Gg]>"
-
-# Border Lines of length three or more.
-# (Several Newsletters use border lines..)
-#  color body green  white    "[-_=+~/\*]{3,}"
-
-# Extensive use of exclamation and question marks:
-# "!!!"  "???"
-#  color body red    white    "[!?]{3,}"
-
-# Percentages ("Save xx.x %!")
-#  color body brightgreen white "[.0-9]+ ?%"
-
-# Copyright (C) and Registered Trademark (r)
-#  color body red white "[(][cr][)]"
-#  color body red white "\\(c\\)"
-
-# Year Numbers 1980-2002
-#  color body blue white "19[89][0-9]"
-#  color body blue white "200[012]"
-
-# Phone Numbers:
-#  color body blue white "1-[0-9]{3}[- ][-0-9]+ +ext.? [0-9]+"
-#  color body blue white "(tele)?(cell|fax|fon|phone|tel)[.: ]+[+]?[- 0-9/()]{4,}[0-9]"
-
-# RTFM!
-# " man word"
-#  color body white red "^ +[$]? *man \\w+"
-
-# Lists
-# bulleted list:
-# * one
-# * two
-# * three
-# dashed list:
-# - one
-# - two
-# - three
-# color body red          black "^ *[-*] +"
-# this pattern yields many false positives as it
-# spans lines for which there is no syntax language.
-# this is easier with Vim's syntax coloring.
-#  color body red white "^ *[-*] +"
-
-# special IP Host Adresses:
-# 192.x.x.x
-#  color body white blue  "129.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"
-#  color body white blue  "193.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"
-
-# HTML tags
-#  color body yellow       black "</?\w+>"
-
-# Finding myself in Emails
-#  color body  brightyellow yellow  "(Michael|Prokop)"
-#  color body  brightyellow yellow  "online@michael-prokop.at"
-
-# Emphasis by interspersed spaces
-# Example: E M P H A S I S
-#  color body red white '\<\w( +\w\>)+'
-
-# verbatim marks (#v+ till #v-)
-# color body yellow red  ^\#v[-+]
-
-#EOF vim: ft=muttrc

@@ -1,11 +1,11 @@
 # Main configuration based on http://www.physics.drexel.edu/liki/index.php/Mutt
 
-set folder = ~/Mail.new
-source ~/.mail_config/mutt/muttmailboxes
+set folder = ~/Mail.ddonisa@gnuine.com
+source ~/.mutt/muttmailboxes
 set spoolfile=+"INBOX
 
-source ~/.mail_config/mutt/common
-source ~/.mail_config/mutt/colors
+source ~/.mutt/common
+source ~/.mutt/colors
 # Not using alias to store addresses now,
 # using lbdb
 #set alias_file=~/.mail_config/mutt/aliases
